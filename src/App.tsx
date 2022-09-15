@@ -18,7 +18,7 @@ interface Game {
 }
 
 function App() {
-  const [games, setGames] = useState<Game[]>();
+  const [games, setGames] = useState<Game[]>([]);
 
   useEffect(() => {
     fetch("http://localhost:3000/games")
@@ -39,18 +39,16 @@ function App() {
       </h1>
 
       <div className="grid grid-cols-6 gap-6 my-16">
-        {games
-          ? games.map((game) => {
-              return (
-                <GameBanner
-                  key={game.id}
-                  bannerUrl={game.bannerUrl}
-                  title={game.title}
-                  adsCount={game._count.ads}
-                />
-              );
-            })
-          : null}
+        {games.map((game) => {
+          return (
+            <GameBanner
+              key={game.id}
+              bannerUrl={game.bannerUrl}
+              title={game.title}
+              adsCount={game._count.ads}
+            />
+          );
+        })}
       </div>
 
       <Dialog.Root>
